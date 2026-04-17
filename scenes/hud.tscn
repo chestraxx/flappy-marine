@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bhud001"]
+
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100
+offset_top = 20
+offset_right = 100
+offset_bottom = 70
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.85, 0.75, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+
+[node name="TitlePanel" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160
+offset_top = -120
+offset_right = 160
+offset_bottom = 120
+alignment = 1
+
+[node name="Title" type="Label" parent="TitlePanel"]
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.85, 0.75, 0.2, 1)
+text = "FLAPPY MARINE"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="TitlePanel"]
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.7, 0.65, 0.5, 1)
+text = "For the Emperor!"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="TitlePanel"]
+custom_minimum_size = Vector2(0, 30)
+
+[node name="StartButton" type="Button" parent="TitlePanel"]
+custom_minimum_size = Vector2(200, 50)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.85, 0.75, 0.2, 1)
+text = "DEPLOY"
+
+[node name="GameOverPanel" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160
+offset_top = -120
+offset_right = 160
+offset_bottom = 120
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel"]
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.8, 0.15, 0.15, 1)
+text = "THE EMPEROR WEEPS"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel"]
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.85, 0.75, 0.2, 1)
+text = "KILLS: 0"
+horizontal_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="GameOverPanel"]
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.7, 0.65, 0.5, 1)
+text = "RECORD: 0"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="GameOverPanel"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="RestartButton" type="Button" parent="GameOverPanel"]
+custom_minimum_size = Vector2(200, 50)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.85, 0.75, 0.2, 1)
+text = "REDEPLOY"
+
+[connection signal="pressed" from="TitlePanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="GameOverPanel/RestartButton" to="." method="_on_restart_button_pressed"]
