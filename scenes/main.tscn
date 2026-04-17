@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmain001"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://bplayer001" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://bhud001" path="res://scenes/hud.tscn" id="3_hud"]
+[ext_resource type="Texture2D" uid="uid://bg_tex" path="res://assets/background.png" id="4_bg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(500, 20)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 480
+offset_bottom = 720
+texture = ExtResource("4_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PipeContainer" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(144, 360)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(240, 730)
+collision_layer = 2
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(240, -10)
+collision_layer = 2
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="PipeTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Player/Hitbox" to="." method="_on_player_hitbox_area_entered"]
+[connection signal="body_entered" from="Player/Hitbox" to="." method="_on_player_hitbox_body_entered"]
